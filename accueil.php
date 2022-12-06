@@ -27,7 +27,7 @@ $result = mysqli_query($link,$query);
 </head>
 <body>
     <h1>Accueil</h1>
-    <a href="panier.php"><img src="panier.png" alt="image panier"></a>
+    <a href="panier.php"><img src="img/panier.png" alt="image panier"></a>
 
 
 <?php
@@ -37,20 +37,17 @@ while($ligne = mysqli_fetch_assoc($result)){
     $chp3=$ligne["titre"];
     $chp4=$ligne["auteur"];
     $chp5=$ligne["prix"];
-    print "<div><ul><li>Code : $chp1 <br></li>";
+    print "<a href='panier.php?action=ajout&amp;l=$chp3&amp;q=1&amp;p=$chp5');>Ajouter au panier</a>";
+    print "<button><div><ul><li>Code : $chp1 <br></li>";
     print "<li>Genre : $chp2 <br></li>";
     print "<li>Titre : $chp3 <br></li>";
     print "<li>Auteur : $chp4 <br></li>";
     print "<li>Prix : $chp5 euros<br></li></ul>";
-    print '<img src=image.php><br>';
+    print '<img class=\'vignette\'src=img/vignette.jpg><br></button>';
 }
 $link->close();
+print '<style>.vignette{width:10%;height:10%;}</style>';
 ?>
-
-<div>
-        <img src="img/vignette.jpg" alt="image vignette">
-    </div>
-    <img src=index.php><br>
     <form method="post" action="deconnexion.php">
     <button name="OK"> Deconnexion </button>
     </form>
