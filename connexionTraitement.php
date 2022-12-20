@@ -5,7 +5,7 @@ $passwd = htmlspecialchars($_POST['passwd']);
 
 if($login == 'root' && $passwd == 'root'){
     $_SESSION['user'] = 'root';
-    header('Location: accueil.php');
+    header('Location: administrateur.php');
 }
 else{
     header('Location: connexion.php?err=true');

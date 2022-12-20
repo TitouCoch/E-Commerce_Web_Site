@@ -16,19 +16,18 @@ session_start();
     <script>
     </script>
 <h1>Accueil</h1>
-    <a href="accueil.php"><img src="img/iconeAccueil.png" alt="image accueil"></a>
+    <a href="accueil.php"><img src="img/iconeAccueil.png" alt="image accueil" style="width: 100px; height: 100px;"></a>
     <?php 
     if($_SESSION['panier']!=[]){
         foreach ($_SESSION['panier'] as $code => $produit) {
             if($code=!null){
-                print "Code du produit : " . $code . "<br>";
+                print "Code du produit : " . $produit['Code'] . "<br>";
                 print "Genre : " . $produit['Genre'] . "<br>";
                 print "Titre : " . $produit['Titre'] . "<br>";
                 print "Auteur : " . $produit['Auteur'] . "<br>";
                 print "Prix : " . $produit['Prix'] . "<br>";
                 print "<form method='get' action='suppArticle.php'>";
-                print "<input type='hidden' name='code' value='".$code."'>";
-                print "<input type='hidden' name='prix' value='".$produit['Prix']."'>";
+                print "<input type='hidden' name='code' value='".$produit['Code']."'>";
                 print "<button>Supprimer article</button>";
                 print "</form>";
             }
@@ -38,6 +37,9 @@ session_start();
     ?>
     <form method="post" action="viderPanier.php">
     <button> Vider Panier </button>
+    </form>
+    <form method="post" action="paiement.php">
+    <button>Payer</button>
     </form>
 </body>
 </html>

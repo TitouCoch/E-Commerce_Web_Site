@@ -2,10 +2,6 @@
 //On démarre la session
 session_start();
 //On verifie qu'une session est active
-if(!isset($_SESSION['user'])){
-    header('location: connexion.php');
-    exit;
-}
 if(!isset($_SESSION['panier'])){
     $_SESSION['panier']=[];
 }
@@ -33,6 +29,7 @@ $result = mysqli_query($link,$query);
 <body>
 <script>
         function add(code) {
+            console.log(code)
             var genre = document.getElementById('genre_'+code).innerHTML;
             var titre = document.getElementById('titre_'+code).innerHTML;
             var auteur = document.getElementById('auteur_'+code).innerHTML;
@@ -50,8 +47,10 @@ $result = mysqli_query($link,$query);
         }
     </script>
     <h1>Accueil</h1>
-    <a href="panier.php"><img src="img/panier.png" alt="image panier"></a>
-
+    <a href="panier.php"><img src="img/iconePanier.png" alt="image panier" style="width: 100px; height: 100px;"></a>
+    <form method="post" action="administrateur.php">
+    <button name="OK"> Accès administrateur </button>
+    </form>
 
 <?php
 print "<div class='article'>";
@@ -82,8 +81,5 @@ print "<style>
   }
 </style>";
 ?>
-    <form method="post" action="deconnexion.php">
-    <button name="OK"> Deconnexion </button>
-    </form>
 </body>
 </html>
