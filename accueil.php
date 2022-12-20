@@ -1,10 +1,11 @@
 <?php
 //On démarre la session
 session_start();
+$root = false;
 //On verifie qu'une session est active
-if(!isset($_SESSION['panier'])){
-    $_SESSION['panier']=[];
-}
+if(!isset($_SESSION['panier'])){ $_SESSION['panier']=[]; } // creer la variable de session panier si elle n'est pas deja créee
+if(!isset($_SESSION['selection'])){ $_SESSION['selection']=[]; } // creer la variable de session selection si elle n'est pas deja créee
+if(isset($_SESSION['user'])){ $root = true; }    // affiche la page du point de vu administrateur si on est connecté en temps qu'administrateur 
 
 
 $bdd = "sitePHP";
@@ -28,13 +29,13 @@ $result = mysqli_query($link,$query);
 </head>
 <body>
 <script>
-        function add(code) {
+        function ajouterAuPanier(code) {
             console.log(code)
             var genre = document.getElementById('genre_'+code).innerHTML;
             var titre = document.getElementById('titre_'+code).innerHTML;
             var auteur = document.getElementById('auteur_'+code).innerHTML;
             var prix = document.getElementById('prix_'+code).innerHTML;
-            url = "addajax.php?code="+code+"&genre="+genre+"&titre="+titre+"&auteur="+auteur+"&prix="+prix;
+            url = "ajouterAuPanierAjax.php?code="+code+"&genre="+genre+"&titre="+titre+"&auteur="+auteur+"&prix="+prix;
             console.log(url);
             var xhr = new XMLHttpRequest();
             xhr.open( 'GET' , url , true);
@@ -45,6 +46,20 @@ $result = mysqli_query($link,$query);
             }
             xhr.send()
         }
+        function ajouterSelection(code) {
+
+            console.log(code)
+            url = "ajouterSelection.php?code="+code;
+            var xhr = new XMLHttpRequest();
+            xhr.open( 'GET' , url , true);
+            xhr.onreadystatechange = function(){
+                if(xhr.readyaState===4 && xhr.status===200){
+                    console.log("ok");
+                }
+            }
+            xhr.send()
+        }
+
     </script>
     <h1>Accueil</h1>
     <a href="panier.php"><img src="img/iconePanier.png" alt="image panier" style="width: 100px; height: 100px;"></a>
@@ -68,10 +83,16 @@ while($ligne = mysqli_fetch_assoc($result)){
         print "<div id='titre_".$chp1."'>$chp3<br></div>";
         print "<div id='auteur_".$chp1."'>$chp4<br></div>";
         print "<div id='prix_".$chp1."'>$chp5</div>";print "<p>euros <br></p>";
-        print "<button onClick='add($chp1)'>ADD<br></button>";
-        
+        print "<button onClick='ajouterAuPanier($chp1)'>ADD<br></button>";
+        if($root){
+            print "<button id='boutonSelection' onClick='ajouterSelection($chp1)'>Selectionner<br></button>"; // bouton qui ajoute le cd a une selection pour pouvoir le supprimer
+        };
 }
 print "</div>";
+if($root){
+    print "<div class='article'>";
+    print "<a href='ajouterCD.php'><img src='img/iconeAjouter.png' width='200' height='200'></a>";
+    print "</div>";};
 $link->close();
 print "<style>
   .article {

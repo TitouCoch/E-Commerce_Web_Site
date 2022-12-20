@@ -16,8 +16,11 @@ if(!isset($_SESSION['user'])){
 </head>
 <body>
     <h1>Admin</h1>
+    <form method="post" action="accueil.php">
+    <button name="gererCD"> gerer les CDs </button>
+    </form>
     <form method="post" action="deconnexion.php">
-    <button name="OK"> Deconnexion </button>
+    <button name="deconnexion"> Deconnexion </button>
     </form>
 </body>
 </html>
