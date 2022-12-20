@@ -47,8 +47,9 @@ $result = mysqli_query($link,$query);
             xhr.send()
         }
         function ajouterSelection(code) {
-
-            console.log(code)
+            var article = document.getElementById('article_'+code);
+            article.style.border = "2px solid red";
+            console.log(code);
             url = "ajouterSelection.php?code="+code;
             var xhr = new XMLHttpRequest();
             xhr.open( 'GET' , url , true);
@@ -58,6 +59,7 @@ $result = mysqli_query($link,$query);
                 }
             }
             xhr.send()
+            
         }
 
     </script>
@@ -68,8 +70,9 @@ $result = mysqli_query($link,$query);
     </form>
 
 <?php
-print "<div class='article'>";
+
 while($ligne = mysqli_fetch_assoc($result)){
+    
     $chp1=$ligne["CODE"];
     $chp2=$ligne["genre"];
     $chp3=$ligne["titre"];
@@ -77,23 +80,29 @@ while($ligne = mysqli_fetch_assoc($result)){
     $chp5=$ligne["prix"];
     $chp6=$ligne["lienImage"];
     $chp7=$ligne["description"];
-        print "<img src='vignette.php?lien=".$chp6."&width=200&height=200' >";
-        print "<div>Code : $chp1 <br></div>";
-        print "<div id='genre_".$chp1."'>$chp2<br></div>";
-        print "<div id='titre_".$chp1."'>$chp3<br></div>";
-        print "<div id='auteur_".$chp1."'>$chp4<br></div>";
-        print "<div id='prix_".$chp1."'>$chp5</div>";print "<p>euros <br></p>";
-        print "<button onClick='ajouterAuPanier($chp1)'>ADD<br></button>";
-        if($root){
-            print "<button id='boutonSelection' onClick='ajouterSelection($chp1)'>Selectionner<br></button>"; // bouton qui ajoute le cd a une selection pour pouvoir le supprimer
-        };
+    print "<div id='article_".$chp1."' class='article'>";
+    print "<img src='vignette.php?lien=".$chp6."&width=200&height=200' >";
+    print "<div>Code : $chp1 <br></div>";
+    print "<div id='genre_".$chp1."'>$chp2<br></div>";
+    print "<div id='titre_".$chp1."'>$chp3<br></div>";
+    print "<div id='auteur_".$chp1."'>$chp4<br></div>";
+    print "<div id='prix_".$chp1."'>$chp5</div>";print "<p>euros <br></p>";
+    print "<button onClick='ajouterAuPanier($chp1)'>ADD<br></button>";
+    if($root){
+        print "<button id='boutonSelection' onClick='ajouterSelection($chp1)'>Selectionner<br></button>"; // bouton qui ajoute le cd a une selection pour pouvoir le supprimer
+    };
+    print "</div>";
 }
-print "</div>";
+
+$link->close();
 if($root){
     print "<div class='article'>";
-    print "<a href='ajouterCD.php'><img src='img/iconeAjouter.png' width='200' height='200'></a>";
-    print "</div>";};
-$link->close();
+    print "<a href='formulaireAjout.php?code=".$chp1."'><img src='img/iconeAjouter.png' width='200' height='200'></a>";
+    print "</div>";
+    print "<div class='article'>";
+    print "<a href='supprimerSelection.php'><img src='img/delete.png' width='200' height='200'></a>";
+    print "</div>";
+};
 print "<style>
   .article {
     display: flex;
