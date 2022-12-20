@@ -6,10 +6,15 @@ if(!isset($_SESSION['user'])){
     header('location: connexion.php');
     exit;
 }
-$bdd = "tcocheril001_bd";
-$host= "lakartxela.iutbayonne.univ-pau.fr";
-$user = "tcocheril001_bd";
-$pass = "tcocheril001_bd";
+if(!isset($_SESSION['panier'])){
+    $_SESSION['panier']=[];
+}
+
+
+$bdd = "sitePHP";
+$host= "localhost";
+$user = "root";
+$pass = "root";
 $nomTable = "CD";
 $link=mysqli_connect($host,$user,$pass,$bdd) or  die ( "Impossible de se connecter à la BD");
 $query = "Select * From $nomTable order by code ASC";
@@ -26,27 +31,56 @@ $result = mysqli_query($link,$query);
     <title>Site de CD</title>
 </head>
 <body>
+<script>
+        function add(code) {
+            var genre = document.getElementById('genre_'+code).innerHTML;
+            var titre = document.getElementById('titre_'+code).innerHTML;
+            var auteur = document.getElementById('auteur_'+code).innerHTML;
+            var prix = document.getElementById('prix_'+code).innerHTML;
+            url = "addajax.php?code="+code+"&genre="+genre+"&titre="+titre+"&auteur="+auteur+"&prix="+prix;
+            console.log(url);
+            var xhr = new XMLHttpRequest();
+            xhr.open( 'GET' , url , true);
+            xhr.onreadystatechange = function(){
+                if(xhr.readyaState===4 && xhr.status===200){
+                    console.log("ok");
+                }
+            }
+            xhr.send()
+        }
+    </script>
     <h1>Accueil</h1>
     <a href="panier.php"><img src="img/panier.png" alt="image panier"></a>
 
 
 <?php
+print "<div class='article'>";
 while($ligne = mysqli_fetch_assoc($result)){
-    $chp1=$ligne["code"];
+    $chp1=$ligne["CODE"];
     $chp2=$ligne["genre"];
     $chp3=$ligne["titre"];
     $chp4=$ligne["auteur"];
     $chp5=$ligne["prix"];
-    print "<a href='panier.php?action=ajout&amp;l=$chp3&amp;q=1&amp;p=$chp5');>Ajouter au panier</a>";
-    print "<button><div><ul><li>Code : $chp1 <br></li>";
-    print "<li>Genre : $chp2 <br></li>";
-    print "<li>Titre : $chp3 <br></li>";
-    print "<li>Auteur : $chp4 <br></li>";
-    print "<li>Prix : $chp5 euros<br></li></ul>";
-    print '<img class=\'vignette\'src=img/vignette.jpg><br></button>';
+    $chp6=$ligne["lienImage"];
+    $chp7=$ligne["description"];
+        print "<img src='vignette.php?lien=".$chp6."&width=200&height=200' >";
+        print "<div>Code : $chp1 <br></div>";
+        print "<div id='genre_".$chp1."'>$chp2<br></div>";
+        print "<div id='titre_".$chp1."'>$chp3<br></div>";
+        print "<div id='auteur_".$chp1."'>$chp4<br></div>";
+        print "<div id='prix_".$chp1."'>$chp5</div>";print "<p>euros <br></p>";
+        print "<button onClick='add($chp1)'>ADD<br></button>";
+        
 }
+print "</div>";
 $link->close();
-print '<style>.vignette{width:10%;height:10%;}</style>';
+print "<style>
+  .article {
+    display: flex;
+    flex-direction : column;
+    align-items: center;
+  }
+</style>";
 ?>
     <form method="post" action="deconnexion.php">
     <button name="OK"> Deconnexion </button>
