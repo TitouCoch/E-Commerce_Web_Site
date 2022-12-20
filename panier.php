@@ -35,7 +35,7 @@ session_start();
     }
      
     ?>
-    <form method="post" action="viderPanier.php">
+    <form method="get" action="viderPanier.php">
     <button> Vider Panier </button>
     </form>
     <form method="post" action="paiement.php">
