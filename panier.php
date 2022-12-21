@@ -1,8 +1,5 @@
 <?php
 session_start();
-//$panier = $_SESSION['panier'];
-//print_r ($panier);
-//On verifie qu'une session est active
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,10 +10,10 @@ session_start();
     <title>Panier</title>
 </head>
 <body>
-    <script>
-    </script>
-<h1>Accueil</h1>
-    <a href="accueil.php"><img src="img/iconeAccueil.png" alt="image accueil" style="width: 100px; height: 100px;"></a>
+    <div class="header">
+    <a href="panier.php"><h1>Panier</h1></a>
+    <a href="accueil.php"><img src="img/iconeAccueil.png" alt="image accueil"></a>
+</div>
     <?php 
     if($_SESSION['panier']!=[]){
         foreach ($_SESSION['panier'] as $code => $produit) {
@@ -41,5 +38,25 @@ session_start();
     <form method="post" action="paiement.php">
     <button>Payer</button>
     </form>
+    <style>  
+    .header {
+        display: flex;
+        background-color: #333;  /* Couleur de fond du bandeau */
+        padding: 20px;  /* Espacement interne du bandeau */
+        justify-content: space-between;
+        align-items:center;
+      }
+      .header a{
+
+        color: #fff;  /* Couleur du texte */
+        font-size: 36px;  /* Taille de la police */
+        text-decoration:none; 
+      }
+      .header img {
+        width: 50;
+        height: 50px;
+        margin-bottom:10px;
+        }
+</style>
 </body>
 </html>

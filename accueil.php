@@ -63,14 +63,24 @@ $result = mysqli_query($link,$query);
         }
 
     </script>
-    <h1>Accueil</h1>
-    <a href="panier.php"><img src="img/iconePanier.png" alt="image panier" style="width: 100px; height: 100px;"></a>
-    <form method="post" action="administrateur.php">
-    <button name="OK"> Accès administrateur </button>
-    </form>
+    <div class="header">
+  <a href="accueil.php"><h1>Accueil</h1></a>
+  <a href="panier.php">
+    <div class="headerRight">
+    <img src="img/iconePanier.png" alt="image panier">
+  </a>
 
+ <?php if(!$root){ ?>
+    <form method="post" action="administrateur.php">
+    <button name="OK">Se connecter</button>
+    </form>
+ </div>
+    <?php } ?>    
+    </div>
 <?php
 
+
+print "<div class='article_grid'>";
 while($ligne = mysqli_fetch_assoc($result)){
     
     $chp1=$ligne["CODE"];
@@ -79,20 +89,22 @@ while($ligne = mysqli_fetch_assoc($result)){
     $chp4=$ligne["auteur"];
     $chp5=$ligne["prix"];
     $chp6=$ligne["lienImage"];
-    $chp7=$ligne["description"];
     print "<div id='article_".$chp1."' class='article'>";
-    print "<img src='vignette.php?lien=".$chp6."&width=200&height=200' >";
+    print "<img src='vignette.php?lien=".$chp6."&width=200&height=200'>";
     print "<div>Code : $chp1 <br></div>";
     print "<div id='genre_".$chp1."'>$chp2<br></div>";
     print "<div id='titre_".$chp1."'>$chp3<br></div>";
     print "<div id='auteur_".$chp1."'>$chp4<br></div>";
     print "<div id='prix_".$chp1."'>$chp5</div>";print "<p>euros <br></p>";
+    if(!$root){
     print "<button onClick='ajouterAuPanier($chp1)'>ADD<br></button>";
+    }
     if($root){
-        print "<button id='boutonSelection' onClick='ajouterSelection($chp1)'>Selectionner<br></button>"; // bouton qui ajoute le cd a une selection pour pouvoir le supprimer
+        print "<button class='connect' id='boutonSelection' onClick='ajouterSelection($chp1)'>Selectionner<br></button>"; // bouton qui ajoute le cd a une selection pour pouvoir le supprimer
     };
     print "</div>";
 }
+print "</div>";
 
 $link->close();
 if($root){
@@ -102,14 +114,49 @@ if($root){
     print "<div class='article'>";
     print "<a href='supprimerSelection.php'><img src='img/delete.png' width='200' height='200'></a>";
     print "</div>";
-};
-print "<style>
-  .article {
+    print "<form method='post' action='deconnexion.php'>";
+    print"<button class='connect' name='deconnexion'> Deconnexion </button>";
+    print"</form>";
+};?>
+<style>  
+    .article_grid {
+    padding:10px;
     display: flex;
-    flex-direction : column;
-    align-items: center;
+    flex-wrap: wrap;
   }
-</style>";
-?>
+    .article {
+        width: 25%;
+        background-color: #bbb;
+        text-align:center;
+    }
+
+    .header {
+        display: flex;
+        background-color: #333;  /* Couleur de fond du bandeau */
+        padding: 20px;  /* Espacement interne du bandeau */
+        justify-content: space-between;
+        align-items:center;
+      }
+      .header a{
+
+        color: #fff;  /* Couleur du texte */
+        font-size: 36px;  /* Taille de la police */
+        text-decoration:none; 
+      }
+      .header img {
+        width: 50;
+        height: 50px;
+        margin-bottom:10px;
+      }
+      .headerRight{
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+      }
+
+      
+</style>
+
 </body>
+
 </html>
