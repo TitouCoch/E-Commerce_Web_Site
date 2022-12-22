@@ -15,17 +15,18 @@ if($error){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styleConnexion.css">
     <title>connexion</title>
 </head>
 <body>
-    <form action="connexionTraitement.php" method="POST">
-        <label for="login">Login </label>
-        <input name="login" placeholder="Login" type="text">
-        <br>
-        <label for="passwd">Password </label>
-        <input name="passwd" placeholder="Mot de passe" type="password">
-        <br>
-        <input type="submit">
+    <form id="login-form" action="connexionTraitement.php" method="POST">
+    <label class="form-label" for="login">Login </label>
+    <input id="login-input" name="login" placeholder="Login" type="text">
+    <br>
+    <label class="form-label" for="passwd">Password </label>
+    <input id="password-input" name="passwd" placeholder="Mot de passe" type="password">
+    <br>
+    <input id="submit-button" type="submit">
     </form>
 </body>
 </html>

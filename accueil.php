@@ -25,43 +25,12 @@ $result = mysqli_query($link,$query);
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styleAccueil.css">
     <title>Site de CD</title>
 </head>
 <body>
-<script>
-        function ajouterAuPanier(code) {
-            console.log(code)
-            var genre = document.getElementById('genre_'+code).innerHTML;
-            var titre = document.getElementById('titre_'+code).innerHTML;
-            var auteur = document.getElementById('auteur_'+code).innerHTML;
-            var prix = document.getElementById('prix_'+code).innerHTML;
-            url = "ajouterAuPanierAjax.php?code="+code+"&genre="+genre+"&titre="+titre+"&auteur="+auteur+"&prix="+prix;
-            console.log(url);
-            var xhr = new XMLHttpRequest();
-            xhr.open( 'GET' , url , true);
-            xhr.onreadystatechange = function(){
-                if(xhr.readyaState===4 && xhr.status===200){
-                    console.log("ok");
-                }
-            }
-            xhr.send()
-        }
-        function ajouterSelection(code) {
-            var article = document.getElementById('article_'+code);
-            article.style.border = "2px solid red";
-            console.log(code);
-            url = "ajouterSelection.php?code="+code;
-            var xhr = new XMLHttpRequest();
-            xhr.open( 'GET' , url , true);
-            xhr.onreadystatechange = function(){
-                if(xhr.readyaState===4 && xhr.status===200){
-                    console.log("ok");
-                }
-            }
-            xhr.send()
-            
-        }
-
+<script src = "script.js">
+        
     </script>
     <div class="header">
   <a href="accueil.php"><h1>Accueil</h1></a>
@@ -70,15 +39,23 @@ $result = mysqli_query($link,$query);
     <img src="img/iconePanier.png" alt="image panier">
   </a>
 
- <?php if(!$root){ ?>
-    <form method="post" action="administrateur.php">
-    <button name="OK">Se connecter</button>
-    </form>
- </div>
-    <?php } ?>    
-    </div>
 <?php
-
+if(!$root)
+{
+    print "<form method='post' action='connexion.php'>";
+    print"<button class='connexion' name='deconnexion'> Connexion </button>";
+    print"</form>";
+}
+else
+{
+    print "<form method='post' action='deconnexion.php'>";
+    print"<button class='connect' name='deconnexion'> Deconnexion </button>";
+    print"</form>";
+};
+?>    
+</div>
+</div>
+<?php
 
 print "<div class='article_grid'>";
 while($ligne = mysqli_fetch_assoc($result)){
@@ -90,12 +67,15 @@ while($ligne = mysqli_fetch_assoc($result)){
     $chp5=$ligne["prix"];
     $chp6=$ligne["lienImage"];
     print "<div id='article_".$chp1."' class='article'>";
+    print "<div class='Cliquable_article' onclick='maFonction($chp1)'>"; // changer fonction
     print "<img src='vignette.php?lien=".$chp6."&width=200&height=200'>";
-    print "<div>Code : $chp1 <br></div>";
-    print "<div id='genre_".$chp1."'>$chp2<br></div>";
-    print "<div id='titre_".$chp1."'>$chp3<br></div>";
-    print "<div id='auteur_".$chp1."'>$chp4<br></div>";
-    print "<div id='prix_".$chp1."'>$chp5</div>";print "<p>euros <br></p>";
+    print "<div style='display: none;' >Code : $chp1 <br></div>";
+    print "<div id='genre_".$chp1."'>$chp2</div>";
+    print "<div id='titre_".$chp1."'>$chp3</div>";
+    print "<div id='auteur_".$chp1."'>$chp4</div>";
+    print "<div id='prix_".$chp1."'>$chp5 €</div>";
+    print "<div style='display: none;' id='lienImage_".$chp1."'>$chp6</div>";
+    print "</div>";
     if(!$root){
     print "<button onClick='ajouterAuPanier($chp1)'>ADD<br></button>";
     }
@@ -105,57 +85,16 @@ while($ligne = mysqli_fetch_assoc($result)){
     print "</div>";
 }
 print "</div>";
-
 $link->close();
 if($root){
     print "<div class='article'>";
-    print "<a href='formulaireAjout.php?code=".$chp1."'><img src='img/iconeAjouter.png' width='200' height='200'></a>";
+    print "<a href='formulaireAjout.php?code=".$chp1."'><img src='img/iconeAjouter.png' width='100' ></a>";
     print "</div>";
     print "<div class='article'>";
-    print "<a href='supprimerSelection.php'><img src='img/delete.png' width='200' height='200'></a>";
+    print "<a href='supprimerSelection.php'><img src='img/delete.png' width='100' ></a>";
     print "</div>";
-    print "<form method='post' action='deconnexion.php'>";
-    print"<button class='connect' name='deconnexion'> Deconnexion </button>";
-    print"</form>";
-};?>
-<style>  
-    .article_grid {
-    padding:10px;
-    display: flex;
-    flex-wrap: wrap;
-  }
-    .article {
-        width: 25%;
-        background-color: #bbb;
-        text-align:center;
-    }
-
-    .header {
-        display: flex;
-        background-color: #333;  /* Couleur de fond du bandeau */
-        padding: 20px;  /* Espacement interne du bandeau */
-        justify-content: space-between;
-        align-items:center;
-      }
-      .header a{
-
-        color: #fff;  /* Couleur du texte */
-        font-size: 36px;  /* Taille de la police */
-        text-decoration:none; 
-      }
-      .header img {
-        width: 50;
-        height: 50px;
-        margin-bottom:10px;
-      }
-      .headerRight{
-        display:flex;
-        flex-direction:column;
-        align-items:center;
-      }
-
-      
-</style>
+};
+?>
 
 </body>
 

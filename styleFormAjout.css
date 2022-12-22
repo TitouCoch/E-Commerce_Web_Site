@@ -1,0 +1,40 @@
+/* Style de base pour les étiquettes */
+label {
+    display: block;
+    font-size: 1em;
+    margin-bottom: 0.5em;
+  }
+  
+  /* Style pour les champs de formulaire */
+  input[type='text'],
+  input[type='file'] {
+    display: block;
+    width: 100%;
+    font-size: 1em;
+    padding: 0.5em;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+  
+  /* Style pour le bouton de soumission */
+  input[type='submit'] {
+    display: block;
+    width: 100%;
+    font-size: 1em;
+    padding: 0.5em;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    background-color: #eee;
+    cursor: pointer;
+  }
+  
+  /* Style pour les champs de formulaire qui ont une erreur */
+  input.error {
+    border-color: red;
+  }
+  
+  /* Style pour les messages d'erreur */
+  label.error {
+    color: red;
+  }
+  

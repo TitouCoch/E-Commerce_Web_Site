@@ -7,6 +7,7 @@ session_start();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stylePanier.css">
     <title>Panier</title>
 </head>
 <body>
@@ -18,6 +19,20 @@ session_start();
     if($_SESSION['panier']!=[]){
         foreach ($_SESSION['panier'] as $code => $produit) {
             if($code=!null){
+
+                print "<div class='article_panier'>";
+                print "<img src='vignette.php?lien=".$produit['lienImage']."&width=100&height=100'>";
+                print "<div id='genre'>".$produit['Genre'] ."   </div>";
+                print "<div id='leinImage'>lienImage".$produit['lienImage']."</div>";
+                print "<div id='titre'>".$produit['Titre'] ."</div>";
+                print "<div id='auteur'>".$produit['Auteur'] ."</div>";
+                print "<div id='prix'>".$produit['Prix']."€</div>";
+                print "<form method='get' action='suppArticle.php'>";
+                print "<input type='hidden' name='code' value='".$produit['Code']."'>";
+                print "<button>Supprimer article</button>";
+                print "</form>";
+                print "</div>";
+                /*
                 print "Code du produit : " . $produit['Code'] . "<br>";
                 print "Genre : " . $produit['Genre'] . "<br>";
                 print "Titre : " . $produit['Titre'] . "<br>";
@@ -27,6 +42,7 @@ session_start();
                 print "<input type='hidden' name='code' value='".$produit['Code']."'>";
                 print "<button>Supprimer article</button>";
                 print "</form>";
+                */
             }
         }
     }
@@ -38,25 +54,5 @@ session_start();
     <form method="post" action="paiement.php">
     <button>Payer</button>
     </form>
-    <style>  
-    .header {
-        display: flex;
-        background-color: #333;  /* Couleur de fond du bandeau */
-        padding: 20px;  /* Espacement interne du bandeau */
-        justify-content: space-between;
-        align-items:center;
-      }
-      .header a{
-
-        color: #fff;  /* Couleur du texte */
-        font-size: 36px;  /* Taille de la police */
-        text-decoration:none; 
-      }
-      .header img {
-        width: 50;
-        height: 50px;
-        margin-bottom:10px;
-        }
-</style>
 </body>
 </html>
