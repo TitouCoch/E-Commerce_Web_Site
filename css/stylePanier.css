@@ -1,0 +1,97 @@
+/* Style de base pour les articles */
+body{
+  background-color: #333;  
+}
+
+.header {
+    display: flex;
+    background-color: #333;  /* Couleur de fond du bandeau */
+    margin: 10px;  /* Espacement interne du bandeau */
+    justify-content: space-between;
+    align-items:center;
+  }
+  .header a{
+    color: #fff;  /* Couleur du texte */
+    font-size: 36px;  /* Taille de la police */
+    text-decoration:none; 
+  }
+  .header img {
+    width: 50;
+    height: 50px;
+}
+
+
+/* Style pour la grille d'articles */
+.article_grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.texteArticle{
+  color:black;
+}
+
+
+.article_panier {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 250px;
+  margin: 1em;
+  margin-top:0px;
+  background-color: rgb(68, 68, 68);  
+  box-sizing: border-box;
+}
+
+/* Style pour l'image de l'article */
+.article_panier img {
+  margin: 1em;
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+}
+
+/* Style pour les informations de l'article */
+.article_panier div {
+  text-align: center;
+  margin: 0.5em;
+}
+
+.boutonPanier button,.article_panier button {
+  /* Modifiez les propriétés CSS suivantes pour styliser votre bouton */
+  margin: 1em;
+  background-color: rgb(116, 116, 117);
+  color: white;
+  font-size: 16px;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  /* Ajoutez une animation au bouton */
+  transition: all 0.3s ease-in-out;
+}
+
+.article_panier button:hover {
+  /* Modifiez les propriétés CSS suivantes pour ajouter une animation au survol du bouton */
+  background-color: rgb(38, 38, 38);
+  transform: scale(1.1);
+}
+
+#boutonViderPanier:hover{
+  background-color: rgb(212, 40, 40);
+  transform: scale(1.1);
+}
+
+#boutonPayer:hover{
+  background-color: rgb(64, 139, 10);
+  transform: scale(1.1);
+}
+
+.optionPanier{
+  display: flex;
+}
+
+.footerPanier{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

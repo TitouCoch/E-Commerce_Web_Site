@@ -1,5 +1,6 @@
 body {
-    font-family: Arial, sans-serif;
+  background-color: #333;  
+  font-family: Arial, sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -8,6 +9,8 @@ body {
   
   h1 {
     text-align: center;
+    color:aliceblue;
+    font-size: 36px;  /* Taille de la police */
   }
   
   #button-container {
@@ -17,8 +20,7 @@ body {
     margin-top: 20px;
   }
   
-  #manage-cd-button,
-  #logout-button {
+  #manage-cd-button{
     width: 200px;
     padding: 12px 20px;
     margin: 8px;
@@ -29,9 +31,22 @@ body {
     color: white;
     cursor: pointer;
   }
+  #logout-button {
+    width: 200px;
+    padding: 12px 20px;
+    margin: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #ee4025;
+    color: white;
+    cursor: pointer;
+  }
   
-  #manage-cd-button:hover,
+  #manage-cd-button:hover {
+    background-color: #26762a;
+  }
   #logout-button:hover {
-    background-color: #45a049;
+    background-color: #ae2525;
   }
   

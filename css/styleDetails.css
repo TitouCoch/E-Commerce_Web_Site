@@ -1,3 +1,8 @@
+body{
+  background-color: #333;  
+  font-family: Arial, sans-serif;
+}
+
 .album {
     display: flex;
     align-items: center;
@@ -34,7 +39,7 @@
   padding: 10px 20px;
   font-size: 16px;
   color: #fff;
-  background-color: #333;
+  background-color: rgb(132, 131, 131);
   border: none;
   border-radius: 4px;
   cursor: pointer;

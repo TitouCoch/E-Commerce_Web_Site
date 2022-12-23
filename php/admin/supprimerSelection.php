@@ -1,11 +1,11 @@
 <?php
 session_start();
 if(!isset($_SESSION['user'])){
-    header('location: connexion.php');
+    header('location: ../connexion/connexion.php');
     exit;
 }
 if(!isset($_SESSION['selection'])){
-    header('location: connexion.php');
+    header('location: ../connexion/connexion.php');
     exit;
 }
 
@@ -32,7 +32,7 @@ foreach ($_SESSION['selection'] as $key => $code) {
     }
  }
  mysqli_close($link);
- header('location: accueil.php')
+ header('location: ../accueil/accueil.php')
 
 
 ?>

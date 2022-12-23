@@ -1,31 +1,42 @@
+body{
+  background-color: #333;  
+  font-family: Arial, sans-serif;
+}
+
 /* Style de base pour les étiquettes */
 label {
     display: block;
     font-size: 1em;
     margin-bottom: 0.5em;
+    color:aliceblue;
+    text-align:center;
   }
   
   /* Style pour les champs de formulaire */
   input[type='text'],
   input[type='file'] {
     display: block;
-    width: 100%;
+    width: 50%;
     font-size: 1em;
     padding: 0.5em;
     border: 1px solid #ccc;
     box-sizing: border-box;
+    margin: auto;
+    color:aliceblue;
   }
   
   /* Style pour le bouton de soumission */
   input[type='submit'] {
     display: block;
-    width: 100%;
+    width: 50%;
     font-size: 1em;
     padding: 0.5em;
     border: 1px solid #ccc;
     box-sizing: border-box;
-    background-color: #eee;
+    background-color: rgb(96, 177, 52);
     cursor: pointer;
+    margin: auto;
+    
   }
   
   /* Style pour les champs de formulaire qui ont une erreur */
@@ -38,3 +49,18 @@ label {
     color: red;
   }
   
+  #boutonRetour {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: rgb(132, 131, 131);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+    #boutonRetour:hover {
+    background-color: #444;
+  }

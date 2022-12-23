@@ -7,7 +7,7 @@ $heightDEST = $_GET['height']; // La hauteur de la vignette générée
 $widthDEST = $_GET['width']; // La largeur de la vignette générée
 
 // Récupération de l'image source à partir du lien et création de l'image qui contiendra la vignette
-$imageSRC = imagecreatefromstring(file_get_contents("img/$lienImage"));
+$imageSRC = imagecreatefromstring(file_get_contents("../img/$lienImage"));
 
 // Récupération des dimensions de l'image source
 $heightSRC = imagesy($imageSRC);

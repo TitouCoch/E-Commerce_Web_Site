@@ -5,7 +5,7 @@ function ajouterAuPanier(code) {
     var auteur = document.getElementById('auteur_'+code).innerHTML;
     var prix = document.getElementById('prix_'+code).innerHTML;
     var lienImage = document.getElementById('lienImage_'+code).innerHTML;
-    url = "ajouterAuPanierAjax.php?code="+code+"&genre="+genre+"&titre="+titre+"&auteur="+auteur+"&prix="+prix+"&lienImage="+lienImage;
+    url = "addArticle.php?code="+code+"&genre="+genre+"&titre="+titre+"&auteur="+auteur+"&prix="+prix+"&lienImage="+lienImage;
     console.log(url);
     var xhr = new XMLHttpRequest();
     xhr.open( 'GET' , url , true);
