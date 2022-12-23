@@ -1,65 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- En-tête de la page -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Lien vers le fichier de style CSS -->
+    <link rel="stylesheet" href="./../../css/styleAccueil.css">
+    <!-- Titre de la page -->
+    <title>Site de CD</title>
+</head>
+<body>
+<!-- Lien vers le script JavaScript -->
+<script src = "../../js/script.js">
+        
+</script>
+<!-- En-tête du site -->
+<div class="header">
+  <!-- Lien vers la page d'accueil -->
+  <a href="accueil.php"><h1>Accueil</h1></a>
+  <!-- Lien vers la page du panier -->
+  <a href="../panier/panier.php">
+    <!-- Contenu à droite de l'en-tête -->
+    <div class="headerRight">
+    <!-- Image du panier -->
+    <img src="../../img/iconePanier.png" alt="image panier">
+  </a>
+
+<!-- Début de la section PHP -->
 <?php
-//On démarre la session
+// On démarre la session
 session_start();
+// On initialise la variable $root à false
 $root = false;
-//On verifie qu'une session est active
-if(!isset($_SESSION['panier'])){ $_SESSION['panier']=[]; } // creer la variable de session panier si elle n'est pas deja créee
-if(!isset($_SESSION['selection'])){ $_SESSION['selection']=[]; } // creer la variable de session selection si elle n'est pas deja créee
-if(isset($_SESSION['user'])){ $root = true; }    // affiche la page du point de vu administrateur si on est connecté en temps qu'administrateur 
+// On vérifie qu'une session est active
+if(!isset($_SESSION['panier'])){ $_SESSION['panier']=[]; } // crée la variable de session panier si elle n'est pas déjà créée
+if(!isset($_SESSION['selection'])){ $_SESSION['selection']=[]; } // crée la variable de session selection si elle n'est pas déjà créée
+// Si l'utilisateur est connecté en tant qu'administrateur
+if(isset($_SESSION['user'])){ 
+  // On modifie la valeur de la variable $root à true
+  $root = true; 
+}
 
-
+// On définit les informations de connexion à la base de données
 $bdd = "sitePHP";
 $host= "localhost";
 $user = "root";
 $pass = "root";
 $nomTable = "CD";
+// On se connecte à la base de données
 $link=mysqli_connect($host,$user,$pass,$bdd) or  die ( "Impossible de se connecter à la BD");
+// On sélectionne toutes les entrées de la table CD et on trie les résultats par code croissant
 $query = "Select * From $nomTable order by code ASC";
 $result = mysqli_query($link,$query);
 
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./../../css/styleAccueil.css">
-    <title>Site de CD</title>
-</head>
-<body>
-<script src = "../../js/script.js">
-        
-    </script>
-    <div class="header">
-  <a href="accueil.php"><h1>Accueil</h1></a>
-  <a href="../panier/panier.php">
-    <div class="headerRight">
-    <img src="../../img/iconePanier.png" alt="image panier">
-  </a>
-
-<?php
-if(!$root)
-{
+// Vérifie si l'utilisateur est connecté en tant qu'administrateur
+if(!$root) {
+    // Affiche un formulaire pour se connecter
     print "<form method='post' action='../connexion/connexion.php'>";
     print"<button class='connexion' name='deconnexion'> Connexion </button>";
     print"</form>";
-}
-else
-{
+} else {
+    // Affiche un formulaire pour se déconnecter
     print "<form method='post' action='./../connexion/deconnexion.php'>";
     print"<button class='connect' name='deconnexion'> Deconnexion </button>";
     print"</form>";
-};
+}
+
 ?>    
 </div>
 </div>
 <?php
 
+// Affiche une grille d'articles
 print "<div class='article_grid'>";
+
+// Récupère les lignes du résultat de la requête SQL et les affiche dans des divs
 while($ligne = mysqli_fetch_assoc($result)){
     
+    // Récupère les champs de chaque ligne
     $chp1=$ligne["CODE"];
     $chp2=$ligne["genre"];
     $chp3=$ligne["titre"];
@@ -67,6 +86,8 @@ while($ligne = mysqli_fetch_assoc($result)){
     $chp5=$ligne["prix"];
     $chp6=$ligne["lienImage"];
     $chp7=$ligne["description"];
+    
+    // Affiche chaque article
     print "<div id='article_".$chp1."' class='article'>";
     print "<a id='cliquable' href='details.php?genre=".urlencode($chp2)."&titre=".urlencode($chp3)."&auteur=".urlencode($chp4)."&prix=".urlencode($chp5)."&lienImage=".urlencode($chp6)."&description=".urlencode($chp7)."'>";
     print "<img src='../vignette.php?lien=".$chp6."&width=200&height=200'>";
@@ -78,25 +99,31 @@ while($ligne = mysqli_fetch_assoc($result)){
     print "<div style='display: none;' id='lienImage_".$chp1."'>$chp6</div>";
     print "</a>";
     if(!$root){
-    print "<button onClick='ajouterAuPanier($chp1)'>ADD<br></button>";
+        // Si l'utilisateur n'est pas administrateur, affiche un bouton pour ajouter le CD au panier
+        print "<button onClick='ajouterAuPanier($chp1)'>ADD<br></button>";
     }
     if($root){
-        print "<button class='connect' id='boutonSelection' onClick='ajouterSelection($chp1)'>Selectionner<br></button>"; // bouton qui ajoute le cd a une selection pour pouvoir le supprimer
+        // Si l'utilisateur est administrateur, affiche un bouton pour ajouter le CD à une sélection
+        print "<button class='connect' id='boutonSelection' onClick='ajouterSelection($chp1)'>Selectionner<br></button>"; 
     };
+    // Ferme la div du CD en cours d'affichage
     print "</div>";
-}
-print "</div>";
-$link->close();
-if($root){
-    print "<div class='article'>";
-    print "<a href='../admin/formulaireAjout.php?code=".$chp1."'><img src='../../img/iconeAjouter.png' width='100' ></a>";
+    }
+    // Ferme la div qui contient tous les CDs
     print "</div>";
-    print "<div class='article'>";
-    print "<a href='../admin/supprimerSelection.php'><img src='../../img/delete.png' width='100' ></a>";
-    print "</div>";
-};
-?>
-
-</body>
-
-</html>
+    // Ferme la connexion à la base de données
+    $link->close();
+    if($root){
+        // Si l'utilisateur est administrateur, affiche un lien pour ajouter un nouveau CD et un lien pour supprimer la sélection
+        print "<div class='article'>";
+        print "<a href='../admin/formulaireAjout.php?code=".$chp1."'><img src='../../img/iconeAjouter.png' width='100' ></a>";
+        print "</div>";
+        print "<div class='article'>";
+        print "<a href='../admin/supprimerSelection.php'><img src='../../img/delete.png' width='100' ></a>";
+        print "</div>";
+    };
+    ?>
+    
+    </body>
+    </html>
+    

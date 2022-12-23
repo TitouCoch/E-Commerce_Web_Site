@@ -1,5 +1,9 @@
 <?php
+// Démarrage de la session
 session_start();
+
+// Code HTML du fichier panier.php
+// Ce fichier affiche le panier de l'utilisateur et lui permet de payer ou de vider son panier
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,35 +15,41 @@ session_start();
     <title>Panier</title>
 </head>
 <body>
+    <!-- En-tête de la page -->
     <div class="header">
         <a href="panier.php"><h1>Panier</h1></a>
         <a href="../accueil/accueil.php"><img src="../../img/iconeAccueil.png" alt="image accueil"></a>
     </div>
-    <div class='article_grid'>
-    <?php 
-    if($_SESSION['panier']!=[]){
-        foreach ($_SESSION['panier'] as $code => $produit) {
-            if($code=!null){
-                print "<div class='article_panier'>";
-                print "<img src='../vignette.php?lien=".$produit['lienImage']."&width=100&height=100'>";
-                print "<div id='genre'>".$produit['Genre'] ."   </div>";
-                print "<div id='lienImage'>lienImage".$produit['lienImage']."</div>";
-                print "<div id='titre'>".$produit['Titre'] ."</div>";
-                print "<div id='auteur'>".$produit['Auteur'] ."</div>";
-                print "<div id='prix'>".$produit['Quantite']*$produit['Prix']."€</div>";
-                print "<div id='Quantité'>QUANTITE : ".$produit['Quantite']."</div>";
+<!-- Grille d'articles dans le panier -->
+<div class='article_grid'>
+<?php 
+// Si le panier de l'utilisateur n'est pas vide
+if($_SESSION['panier']!=[]){
+    // Pour chaque produit dans le panier
+    foreach ($_SESSION['panier'] as $code => $produit) {
+        // Si le code du produit est différent de null
+        if($code=!null){
+            // Affichage du produit dans le panier
+            print "<div class='article_panier'>";
+            print "<img src='../vignette.php?lien=".$produit['lienImage']."&width=100&height=100'>";
+            print "<div id='genre'>".$produit['Genre'] ."   </div>";
+            print "<div id='lienImage'>lienImage".$produit['lienImage']."</div>";
+            print "<div id='titre'>".$produit['Titre'] ."</div>";
+            print "<div id='auteur'>".$produit['Auteur'] ."</div>";
+            print "<div id='prix'>".$produit['Quantite']*$produit['Prix']."€</div>";
+            print "<div id='Quantité'>QUANTITE : ".$produit['Quantite']."</div>";
 
+            // Options du produit dans le panier (suppression et ajout)
+            print "<div class='optionPanier'><form method='get' action='suppArticle.php'>";
+            print "<input type='hidden' name='code' value='".$produit['Code']."'>";
+            print "<button>-</button></form>";
 
-                print "<div class='optionPanier'><form method='get' action='suppArticle.php'>";
-                print "<input type='hidden' name='code' value='".$produit['Code']."'>";
-                print "<button>-</button></form>";
+            print "<form method='get' action='add.php'>";
+            print "<input type='hidden' name='code' value='".$produit['Code']."'>";
+            print "<button>+</button></form>";
 
-                print "<form method='get' action='add.php'>";
-                print "<input type='hidden' name='code' value='".$produit['Code']."'>";
-                print "<button>+</button></form>";
-
-                print "</div>";
-                print "</div>";
+            print "</div>";
+            print "</div>";
             }
         }
     }
@@ -47,6 +57,7 @@ session_start();
     </div>
 
     <div class="footerPanier">
+    <!--Bouton pour vider le panier -->
     <form class="boutonPanier" method="get" action="viderPanier.php">
     <button id='boutonViderPanier'> Vider Panier </button>
     </form>

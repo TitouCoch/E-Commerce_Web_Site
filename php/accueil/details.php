@@ -9,7 +9,7 @@
 </head>
 <body>
 <?php
-
+// Récupère les données du CD à afficher
 $genre = urldecode($_GET['genre']);
 $titre = urldecode($_GET['titre']);
 $auteur = urldecode($_GET['auteur']);
@@ -17,13 +17,14 @@ $prix = urldecode($_GET['prix']);
 $lienImage = urldecode($_GET['lienImage']);
 $description = urldecode($_GET['description']);
 
-
+// Affiche un bouton de retour vers la page d'accueil
 print "<a id='boutonRetour' href='accueil.php'>Retour</a>";
+// Affiche les détails du CD
 print "<div class='album'>";
 print "<img src='../../img/$lienImage' height='700' class='pochette'>";
 print "<div class='album_info'>";
 print "<h3 class='album_titre'>$titre</h3>";
-print "<pclass='album_valeur'><span class='album_champ'>Titre :</span>";
+print "<p class='album_valeur'><span class='album_champ'>Titre :</span>";
 print " $titre</p>";
 print "<p class='album_valeur'><span class='album_champ'>Artiste :</span>";
 print " $auteur</p>";

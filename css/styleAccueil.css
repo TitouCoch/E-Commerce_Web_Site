@@ -1,41 +1,67 @@
+/* Fichier CSS de la page d'accueil */
 
 /* Style de base pour les articles */
-body{
-  background-color: #333;  
+body {
+  /* Définit la couleur de fond de la page */
+  background-color: #333;
+  /* Définit la police de caractères utilisée pour le texte */
   font-family: Arial, sans-serif;
 }
 
+/* Style pour le bandeau en haut de la page */
 .header {
+  /* Utilise la propriété flexbox pour organiser les éléments de manière flexible */
   display: flex;
-  background-color: #333;  /* Couleur de fond du bandeau */
-  padding: 20px;  /* Espacement interne du bandeau */
+  /* Définit la couleur de fond du bandeau */
+  background-color: #333;
+  /* Définit l'espacement interne du bandeau */
+  padding: 20px;
+  /* Justifie les éléments de manière à ce qu'ils aient un espace égal entre eux */
   justify-content: space-between;
-  align-items:center;
+  /* Aligne les éléments du bandeau au centre */
+  align-items: center;
+  /* Centre le texte du bandeau */
   text-align: center;
 }
-.header a{
-  color: #fff;  /* Couleur du texte */
-  font-size: 36px;  /* Taille de la police */
-  text-decoration:none; 
+
+/* Style pour les liens du bandeau */
+.header a {
+  /* Définit la couleur du texte */
+  color: #fff;
+  /* Définit la taille de la police */
+  font-size: 36px;
+  /* Enlève la décoration sous-jacente des liens */
+  text-decoration: none;
 }
+
+/* Style pour l'image du bandeau */
 .header img {
+  /* Définit la largeur de l'image */
   width: 50;
+  /* Définit la hauteur de l'image */
   height: 50px;
-  margin-bottom:10px;
-}
-.headerRight{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
+  /* Ajoute de l'espacement en bas de l'image */
+  margin-bottom: 10px;
 }
 
-.headerRight{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
+/* Style pour la section de droite du bandeau */
+.headerRight {
+  /* Utilise la propriété flexbox */
+  display: flex;
+  /* Définit la direction des éléments de la section */
+  flex-direction: column;
+  /* Aligne les éléments de la section au centre */
+  align-items: center;
 }
 
+/* Style pour la section de droite du bandeau (répétition de la définition précédente) */
+.headerRight {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
+/* Style pour le bandeau en haut de la page (réécriture des styles précédents) */
 .header {
   display: flex;
   justify-content: space-between;
@@ -45,10 +71,13 @@ body{
   padding: 20px;
 }
 
+/* Style pour le titre du bandeau */
 .header h1 {
+  /* Enlève les marges du titre */
   margin: 0;
 }
 
+/* Style pour la section*/
 .headerRight {
   display: flex;
   align-items: center;
@@ -59,12 +88,13 @@ body{
   height: 30px;
   margin-right: 10px;
 }
-#cliquable{
+
+#cliquable {
   text-decoration: none;
 }
 
-.texteArticle{
-  color:black;
+.texteArticle {
+  color: black;
 }
 
 
@@ -74,7 +104,7 @@ body{
   align-items: center;
   width: 250px;
   margin: 1em;
-  background-color: rgb(68, 68, 68);  
+  background-color: rgb(68, 68, 68);
   box-sizing: border-box;
 }
 
@@ -91,7 +121,8 @@ body{
   margin: 0.5em;
 }
 
-.headerRight button,.article button {
+.headerRight button,
+.article button {
   /* Modifiez les propriétés CSS suivantes pour styliser votre bouton */
   margin: 1em;
   background-color: rgb(116, 116, 117);
@@ -104,7 +135,8 @@ body{
   transition: all 0.3s ease-in-out;
 }
 
-.headerRight button:hover,.article button:hover {
+.headerRight button:hover,
+.article button:hover {
   /* Modifiez les propriétés CSS suivantes pour ajouter une animation au survol du bouton */
   background-color: rgb(38, 38, 38);
   transform: scale(1.1);
