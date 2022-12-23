@@ -10,8 +10,10 @@ if(empty($_SESSION['panier'])){
 <html>
 <head>
   <title>Page de paiement</title>
+  <link rel="stylesheet" href="./../../css/stylePayement.css">
 </head>
 <body>
+  <a id='boutonRetour' href='panier.php'>Retour</a>
   <h1>Page de paiement</h1>
   <p>Veuillez entrer les informations de paiement ci-dessous pour finaliser la comande</p>
 

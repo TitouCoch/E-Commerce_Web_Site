@@ -26,7 +26,7 @@ session_start();
                 print "<div id='lienImage'>lienImage".$produit['lienImage']."</div>";
                 print "<div id='titre'>".$produit['Titre'] ."</div>";
                 print "<div id='auteur'>".$produit['Auteur'] ."</div>";
-                print "<div id='prix'>".$produit['Prix']."€</div>";
+                print "<div id='prix'>".$produit['Quantite']*$produit['Prix']."€</div>";
                 print "<div id='Quantité'>QUANTITE : ".$produit['Quantite']."</div>";
 
 

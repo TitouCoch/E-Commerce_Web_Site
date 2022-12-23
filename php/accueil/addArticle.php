@@ -17,7 +17,6 @@ if($_SESSION['panier'][$code]==null){
     $_SESSION['panier'][$code]['Quantite']=1;
 }
 else{
-    $_SESSION['panier'][$code]['Prix']+=intval($prix);
     $_SESSION['panier'][$code]['Quantite']++;
 }
 
