@@ -66,16 +66,17 @@ while($ligne = mysqli_fetch_assoc($result)){
     $chp4=$ligne["auteur"];
     $chp5=$ligne["prix"];
     $chp6=$ligne["lienImage"];
+    $chp7=$ligne["description"];
     print "<div id='article_".$chp1."' class='article'>";
-    print "<div class='Cliquable_article' onclick='maFonction($chp1)'>"; // changer fonction
+    print "<a id='cliquable' href='details.php?genre=".urlencode($chp2)."&titre=".urlencode($chp3)."&auteur=".urlencode($chp4)."&prix=".urlencode($chp5)."&lienImage=".urlencode($chp6)."&description=".urlencode($chp7)."'>";
     print "<img src='vignette.php?lien=".$chp6."&width=200&height=200'>";
     print "<div style='display: none;' >Code : $chp1 <br></div>";
-    print "<div id='genre_".$chp1."'>$chp2</div>";
+    print "<div style='display: none;' id='genre_".$chp1."'>$chp2</div>";
     print "<div id='titre_".$chp1."'>$chp3</div>";
     print "<div id='auteur_".$chp1."'>$chp4</div>";
     print "<div id='prix_".$chp1."'>$chp5 €</div>";
     print "<div style='display: none;' id='lienImage_".$chp1."'>$chp6</div>";
-    print "</div>";
+    print "</a>";
     if(!$root){
     print "<button onClick='ajouterAuPanier($chp1)'>ADD<br></button>";
     }
