@@ -21,7 +21,7 @@ $widthSRC = imagesx($imageSRC);
 $imageDEST = ImageCreateTrueColor($widthDEST, $heightDEST);
 
 // Redimensionnement de l'image source pour créer la vignette
-imagecopyresized($imageDEST, $imageSRC, 0, 0, 0, 0, $widthDEST, $heightDEST, $widthSRC, $heightSRC);
+imagecopyresampled($imageDEST, $imageSRC, 0, 0, 0, 0, $widthDEST, $heightDEST, $widthSRC, $heightSRC);
 
 // Envoi de l'image de vignette au navigateur
 imagejpeg($imageDEST);
