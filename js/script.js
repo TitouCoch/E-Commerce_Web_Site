@@ -34,6 +34,7 @@ function ajouterAuPanier(code) {
 
 // Fonction qui ajoute un article à la sélection
 function ajouterSelection(code) {
+    console.log("selection");
     // Récupère l'élément HTML de l'article
     var article = document.getElementById('article_' + code);
     // Modifie le style de l'article en lui ajoutant une bordure rouge
@@ -41,7 +42,7 @@ function ajouterSelection(code) {
     // Affiche le code de l'article dans la console
     console.log(code);
     // Crée une URL avec le code de l'article
-    url = "ajouterSelection.php?code=" + code;
+    url = "../admin/ajouterSelection.php?code=" + code;
     // Crée une nouvelle requête HTTP
     var xhr = new XMLHttpRequest();
     // Ouvre la requête avec la méthode GET, l'URL et l'option de requête asynchrone

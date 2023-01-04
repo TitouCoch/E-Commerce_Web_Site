@@ -81,12 +81,10 @@ print $nomImage;
 print "<br>";
 
 # Connexion à la base de données
-$bdd = "sitePHP";
-$host= "localhost";
-$user = "root";
-$pass = "root";
-$nomTable = "CD";
-$link= mysqli_connect($host,$user,$pass,$bdd);
+// on importe le script de connexion a la base de données
+include '../connexionBD.php';
+// on recupere la connexion à la base de données
+$link = connexionBD();
 
 # Vérification de la connexion
 if (!$link) {
@@ -94,7 +92,7 @@ if (!$link) {
 }
 
 # Préparation de la requête d'insertion
-$query = "INSERT INTO $nomTable VALUES ('$code', '$genre', '$titre', '$auteur', '$prix', '$description', '$nomImage')";
+$query = "INSERT INTO CD VALUES ('$code', '$genre', '$titre', '$auteur', '$prix', '$description', '$nomImage')";
 
 # Exécution de la requête
 $result = mysqli_query($link,$query);

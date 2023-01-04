@@ -15,37 +15,24 @@ if(!isset($_SESSION['selection'])){
 }
 
 // Connexion à la base de données
-$bdd = "sitePHP";
-$host= "localhost";
-$user = "root";
-$pass = "root";
-$nomTable = "CD";
-$link= mysqli_connect($host,$user,$pass,$bdd);
+// on importe le script de connexion a la base de données
+include '../connexionBD.php';
+// on recupere la connexion à la base de données
+$link = connexionBD();
 
 // Si la connexion échoue, affiche un message d'erreur
-if (!$link) {
-    print "Erreur lors de la connexion à la base";
-}
 
 // Pour chaque CD sélectionné, on exécute une requête de suppression
 foreach ($_SESSION['selection'] as $key => $code) {
-    echo $code . "\n";
-    $query = "DELETE FROM $nomTable WHERE CODE = '$code'";
+    $query = "DELETE FROM CD WHERE CODE = '$code'";
     $result = mysqli_query($link,$query);
 
     // Si la requête réussit, on affiche un message de succès et on supprime le CD de la session
     if ($result) {
-        print " CD '$code' supprimé avec succès ";
-        unset($_SESSION['selection'][$key]);
-        print " <br> ";
+      unset($_SESSION['selection'][$key]);
     } 
     // Sinon, on affiche un message d'erreur
-    else {
-        print "Erreur lors de la suppression du CD '$code'";
-        print " <br> "; 
-    }
  }
-
 // Ferme la connexion à la base de données
 mysqli_close($link);
 
