@@ -1,3 +1,6 @@
+<?php 
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,7 +33,6 @@
 <!-- Début de la section PHP -->
 <?php
 // On démarre la session
-session_start();
 // On initialise la variable $root à false
 $root = false;
 // On vérifie qu'une session est active
@@ -41,17 +43,12 @@ if(isset($_SESSION['user'])){
   // On modifie la valeur de la variable $root à true
   $root = true; 
 }
-
-// On définit les informations de connexion à la base de données
-$bdd = "sitePHP";
-$host= "localhost";
-$user = "root";
-$pass = "root";
-$nomTable = "CD";
-// On se connecte à la base de données
-$link=mysqli_connect($host,$user,$pass,$bdd) or  die ( "Impossible de se connecter à la BD");
+// on importe le script de connexion a la base de données
+include '../connexionBD.php';
+// on recupere la connexion à la base de données
+$link = connexionBD();
 // On sélectionne toutes les entrées de la table CD et on trie les résultats par code croissant
-$query = "Select * From $nomTable order by code ASC";
+$query = "Select * From CD order by code ASC";
 $result = mysqli_query($link,$query);
 
 // Vérifie si l'utilisateur est connecté en tant qu'administrateur

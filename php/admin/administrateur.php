@@ -20,11 +20,9 @@ if(!isset($_SESSION['user'])){
 <body>
     <h1>Admin</h1>
     <div id="button-container">
-    // Formulaire pour accéder à la gestion des CDs
     <form method="post" action="../accueil/accueil.php">
         <button id="manage-cd-button" name="gererCD"> Gérer CDs </button>
     </form>
-    // Formulaire pour se déconnecter
     <form method="post" action="../connexion/deconnexion.php">
         <button id="logout-button" name="deconnexion"> Deconnexion </button>
     </form>
