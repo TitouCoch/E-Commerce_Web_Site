@@ -31,7 +31,7 @@ if($_SESSION['panier']!=[]){
         if($code=!null){
             // Affichage du produit dans le panier
             print "<div class='article_panier'>";
-            print "<img src='../vignette.php?lien=".$produit['lienImage']."&width=100&height=100'>";
+            print "<img src='../vignette.php?lien=".$produit['lienImage']."&width=200&height=200'>";
             print "<div id='genre'>".$produit['Genre'] ."   </div>";
             print "<div id='lienImage'>lienImage".$produit['lienImage']."</div>";
             print "<div id='titre'>".$produit['Titre'] ."</div>";
