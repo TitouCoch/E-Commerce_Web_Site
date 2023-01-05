@@ -2,8 +2,8 @@
 session_start(); // Démarrage de la session
 
 // Récupération des données de connexion envoyées via le formulaire
-$login = htmlspecialchars($_POST['login']);
-$password = htmlspecialchars($_POST['passwd']);
+$login = sha1(htmlspecialchars($_POST['login']));
+$password = sha1(htmlspecialchars($_POST['passwd']));
 
 // Connexion à la base de données
 // on importe le script de connexion a la base de données

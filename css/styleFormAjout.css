@@ -22,7 +22,7 @@ label {
     border: 1px solid #ccc;
     box-sizing: border-box;
     margin: auto;
-    color:aliceblue;
+    color:rgb(0, 0, 0);
   }
   
   /* Style pour le bouton de soumission */
