@@ -44,7 +44,7 @@ print " <label for='description-input'> Description :</label>";
 print "<input type='text' id='description-input' name='description'><br>";
 
 // Champ de sélection d'image
-print "<input type='file' id='image-input' name='image'><br>";
+print "<input type='file' id='image' name='image'><br>";
 
 // Bouton de soumission du formulaire
 print "<input type='Submit' >";
