@@ -15,23 +15,27 @@ body{
   .album_info {
     display: flex;
     flex-direction: column;
+    color: #fff;
   }
   
   .album_titre {
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 8px;
+    color: #fff;
   }
   
   .album_champ {
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 4px;
+    color: #fff;
   }
   
   .album_valeur {
     font-size: 18px;
     margin-bottom: 8px;
+    color: #fff;
   }
 
   #boutonRetour {

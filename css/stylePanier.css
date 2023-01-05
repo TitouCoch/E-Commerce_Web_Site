@@ -28,7 +28,7 @@ body{
   justify-content: center;
 }
 .texteArticle{
-  color:black;
+  color:rgb(255, 255, 255);
 }
 
 
@@ -55,6 +55,7 @@ body{
 .article_panier div {
   text-align: center;
   margin: 0.5em;
+  color: #fff;
 }
 
 .boutonPanier button,.article_panier button {
