@@ -16,7 +16,7 @@ if($_SESSION['panier'][$code]==null){
     $_SESSION['panier'][$code]['Genre']=$genre;
     $_SESSION['panier'][$code]['Titre']=$titre;
     $_SESSION['panier'][$code]['Auteur']=$auteur; 
-    $_SESSION['panier'][$code]['Prix']=intval($prix);
+    $_SESSION['panier'][$code]['Prix']=floatval($prix);
     $_SESSION['panier'][$code]['lienImage']=$lienImage;
     $_SESSION['panier'][$code]['Quantite']=1;
 }

@@ -1,5 +1,16 @@
 <?php 
 session_start();
+// On démarre la session
+// On initialise la variable $root à false
+$root = false;
+// On vérifie qu'une session est active
+if(!isset($_SESSION['panier'])){ $_SESSION['panier']=[]; } // crée la variable de session panier si elle n'est pas déjà créée
+if(!isset($_SESSION['selection'])){ $_SESSION['selection']=[]; } // crée la variable de session selection si elle n'est pas déjà créée
+// Si l'utilisateur est connecté en tant qu'administrateur
+if(isset($_SESSION['user'])){ 
+    // On modifie la valeur de la variable $root à true
+    $root = true; 
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,6 +33,12 @@ session_start();
 <div class="header">
   <!-- Lien vers la page d'accueil -->
   <a href="accueil.php"><h1>Accueil</h1></a>
+  <?php 
+  if($root){
+    //Affichage 
+    print '<h2 style="color:red; margin-left:120px">Administrateur</h2>';
+  }
+  ?>
   <!-- Lien vers la page du panier -->
   <a href="../panier/panier.php">
     <!-- Contenu à droite de l'en-tête -->
@@ -32,17 +49,6 @@ session_start();
 
 <!-- Début de la section PHP -->
 <?php
-// On démarre la session
-// On initialise la variable $root à false
-$root = false;
-// On vérifie qu'une session est active
-if(!isset($_SESSION['panier'])){ $_SESSION['panier']=[]; } // crée la variable de session panier si elle n'est pas déjà créée
-if(!isset($_SESSION['selection'])){ $_SESSION['selection']=[]; } // crée la variable de session selection si elle n'est pas déjà créée
-// Si l'utilisateur est connecté en tant qu'administrateur
-if(isset($_SESSION['user'])){ 
-  // On modifie la valeur de la variable $root à true
-  $root = true; 
-}
 // on importe le script de connexion a la base de données
 include '../connexionBD.php';
 // on recupere la connexion à la base de données
